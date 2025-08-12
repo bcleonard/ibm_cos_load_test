@@ -1,0 +1,5 @@
+# ignore these output files from ibm_og
+latest
+log
+objects
+var_log_og

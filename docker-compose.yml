@@ -1,0 +1,19 @@
+services:
+  load_test:
+    build: .
+#    image: test
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "3"
+    container_name: ibm_og_icos
+    environment:
+      - MODE=${MODE:-vault}
+    deploy:
+      resources:
+        limits:
+          memory: 3g
+    volumes:
+      - ./:/usr/local/scripts
+      - ./var_log_og:/var/log/og
+#    restart: unless-stopped

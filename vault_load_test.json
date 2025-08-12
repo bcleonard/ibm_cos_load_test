@@ -1,0 +1,76 @@
+{
+  "host":"MY_ACCESSER",
+  "port":"443",
+  "api":"s3",
+  "uri_root": "/",
+  "container": {
+    "selection": "random",
+    "prefix": "ogdata",
+    "min_suffix": 1,
+    "max_suffix": 3
+  },
+  "scheme": "https",
+  "client": {
+    "trust_self_signed_certficates": true
+  },
+  "authentication":{
+    "type": "awsv2",
+    "credential_source": "file",
+    "credential_file": "/usr/local/scripts/vault_credentials.json"
+  },
+  "write":{
+    "weight":10.0
+  },
+  "read":{
+    "weight":80.0
+  },
+  "delete":{
+    "weight":10.0
+  },
+  "filesize": {
+    "selection": "random",
+    "choices": [
+      {
+        "choice": {
+          "distribution": "uniform",
+          "average": 4,
+          "average_unit": "kb",
+          "spread": 2,
+          "spread_unit": "kb"
+        },
+        "weight": 8.0
+      },
+      {
+        "choice": {
+          "distribution": "normal",
+          "average": 4,
+          "average_unit": "mb",
+          "spread": 1,
+          "spread_unit": "mb"
+        },
+        "weight": 1.0
+      },
+      {
+        "choice": {
+          "distribution": "normal",
+          "average": 100,
+          "average_unit": "mb",
+          "spread": 10,
+          "spread_unit": "mb"
+        },
+        "weight": 1.0
+      }
+    ]
+  },
+  "object_manager": {
+    "object_file_location": "/usr/local/scripts/objects",
+    "object_file_name": "my_objects"
+  },
+  "concurrency": {
+    "type": "ops",
+    "count": 240,
+    "unit": "minutes",
+    "rampup": 30,
+    "rampup_unit": "seconds"
+  }
+}
