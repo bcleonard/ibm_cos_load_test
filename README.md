@@ -32,38 +32,38 @@ This phase only runs if the load test in phase 3 fails.  Again, this phase will 
 
 ### Default Configuration
 
-By default this repo will allow you to generated a load against an IBM COS solution in vault mode **OR** a against an IBM COS solution in container mode.  Due to IBM og configuration options and different access pools required for Container Mode Vs Vault mode you can only run a load against vaults or buckets at the same time, just not both.
+By default this repo will allow you to generated a load against an IBM COS solution in vault mode **OR** a against an IBM COS solution in container mode.  Due to IBM og configuration options and different access pools required for Container Mode Vs Vault mode you can only run a load against vaults or buckets just not both at the same time.
 
 #### For Vault mode
 
 * all connections via https (port 443)
 * 3 vaults - ogdata1, ogdata2, ogdata3
 * Initial Load:
-    * write approximately ~300 objects per vault
-    * Object Size Distribution (per every 100 objects)
-        * 80 objects evenly distributed between 2kb & 6kb in size
-        * 10 objects evenly distributed between 3mb & 5mb in size
-        * 10 objects evenly distributed between 90mb & 110mb in size
-    * Request Rate
-        * 240 Operations per minute
-        * ramp up duration of 30 seconds
+  * write approximately ~300 objects per vault
+  * Object Size Distribution (per every 100 objects)
+    * 80 objects evenly distributed between 2kb & 6kb in size
+    * 10 objects evenly distributed between 3mb & 5mb in size
+    * 10 objects evenly distributed between 90mb & 110mb in size
+  * Request Rate
+    * 240 Operations per minute
+    * ramp up duration of 30 seconds
 * Continuous Load:
-    * Request Type (per every 100 objects)
-        * 80 read requests
-        * 10 object writes
-        * 10 object delete
-    * Object Size Distribution (per every 100 objects)
-        * 80 objects evenly distributed between 2kb & 6kb in size
-        * 10 objects evenly distributed between 3mb & 5mb in size
-        * 10 objects evenly distributed between 90mb & 110mb in size
-    * Request Rate
-        * 240 Operations per minute
-        * ramp up duration of 30 seconds
+  * Request Type (per every 100 objects)
+    * 80 read requests
+    * 10 object writes
+    * 10 object delete
+  * Object Size Distribution (per every 100 objects)
+    * 80 objects evenly distributed between 2kb & 6kb in size
+    * 10 objects evenly distributed between 3mb & 5mb in size
+    * 10 objects evenly distributed between 90mb & 110mb in size
+  * Request Rate
+    * 240 Operations per minute
+    * ramp up duration of 30 seconds
 
 #### For Container mode
 
 * all connections via https (port 443)
-* 3 vaults - ogdata4, ogdata5, ogdata3=6
+* 3 vaults - ogdata4, ogdata5, ogdata6
 * Initial Load:
   * write approximately ~300 objects per vault
   * Object Size Distribution (per every 100 objects)
@@ -98,39 +98,47 @@ The following requirements are needed to run/execute this repo:
 ## How to configure & run
 
 1. clone the repo
+
 2. For Vault mode, create the following vaults, each vault must be accessible with the same access key & secret key:
-  - ogdata1
-  - ogdata2
-  - ogdata3
+
+  * ogdata1
+  * ogdata2
+  * ogdata3
+
 3. For Vault Mode, edit the following configuration files:
-  * vault_credentials.json - replace MY_ACCESS_KEY & MY_SECRET_KEY with your keys
-  * vault_init_test.json - replace MY_ACCESSER with the hostname or IP address of your accesser or load balancer
-  * vault_load_test.json - replace MY_ACCESSER with the hostname or IP address of your accesser or load balancer
+
+  * vault_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
+  * vault_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+  * vault_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+
 4. For Container mode, create the following buckets, each bucket must be accessible with the same access key & secret key:
+
   * ogdata4
   * ogdata5
   * ogdata6
+
 5. For Container Mode, edit the following configuration files:
-  * container_credentials.json - replace MY_ACCESS_KEY & MY_SECRET_KEY with your keys
-  * container_init_test.json - replace MY_ACCESSER with the hostname or IP address of your accesser or load balancer
-  * container_load_test.json - replace MY_ACCESSER with the hostname or IP address of your accesser or load balancer
+  * container_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
+  * container_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+  * container_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+
 6. build the docker image:
 
-```bash
-docker compose build
-```
+  ```bash
+  docker compose build
+  ```
 
 7. To run the test for vault mode:
 
-```bash
-docker compose run
-```
+  ```bash
+  docker compose run
+  ```
 
 8. To run the test for container mode:
 
-```bash
-MODE=container docker compose run
-```
+  ```bash
+  MODE=container docker compose run
+  ```
 
 ## Support
 
