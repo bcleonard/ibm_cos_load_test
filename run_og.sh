@@ -21,4 +21,3 @@ echo "WIPING DATA in ${MODE} mode."
 ${WIPE_CMD}
 
 exit
-

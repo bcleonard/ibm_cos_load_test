@@ -131,13 +131,13 @@ The following requirements are needed to run/execute this repo:
 7. To run the test for vault mode:
 
   ```bash
-  docker compose run
+  docker compose up
   ```
 
 8. To run the test for container mode:
 
   ```bash
-  MODE=container docker compose run
+  MODE=container docker compose up
   ```
 
 ## Support
