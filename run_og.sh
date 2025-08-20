@@ -8,6 +8,9 @@ echo "RUNNING TESTS for ${MODE} mode."
 INITIAL_CONFIG="${SCRIPT_DIR}/${MODE}_init_test.json"
 LOADTEST_CONFIG="${SCRIPT_DIR}/${MODE}_load_test.json"
 
+# FIX CERTS
+${SCRIPT_DIR}/fix_cert.sh
+
 echo "WIPING DATA in ${MODE} mode."
 ${WIPE_CMD}
 
@@ -21,3 +24,4 @@ echo "WIPING DATA in ${MODE} mode."
 ${WIPE_CMD}
 
 exit
+

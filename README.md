@@ -98,43 +98,44 @@ The following requirements are needed to run/execute this repo:
 ## How to configure & run
 
 1. clone the repo
+1. Obtain the IBM Cloud Object Storage Internal CA certificate and places the contents of the certificate in the file `ibm_cos_internal_ca.crt`.  You can obtain the IBM COS Internal CA certificate by logging on and selecting `Settings` -> `Authentication` -> `Certificate Authority` -> `Edit` on the `Internal CA`.  Everything between `-----BEGIN CERTIFICATE-----` and `-----END CERTIFICATE-----` is the certificate (including the lines with BEGIN and END).
+1. For Vault mode, create the following vaults, each vault must be accessible with the same access key & secret key:
 
-2. For Vault mode, create the following vaults, each vault must be accessible with the same access key & secret key:
+    * ogdata1
+    * ogdata2
+    * ogdata3
 
-  * ogdata1
-  * ogdata2
-  * ogdata3
+1. For Vault Mode, edit the following configuration files:
 
-3. For Vault Mode, edit the following configuration files:
+    * vault_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
+    * vault_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+    * vault_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
 
-  * vault_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
-  * vault_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
-  * vault_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+1. For Container mode, create the following buckets, each bucket must be accessible with the same access key & secret key:
 
-4. For Container mode, create the following buckets, each bucket must be accessible with the same access key & secret key:
+    * ogdata4
+    * ogdata5
+    * ogdata6
 
-  * ogdata4
-  * ogdata5
-  * ogdata6
+1. For Container Mode, edit the following configuration files:
 
-5. For Container Mode, edit the following configuration files:
-  * container_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
-  * container_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
-  * container_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+    * container_credentials.json - replace **MY_ACCESS_KEY** & **MY_SECRET_KEY** with your keys
+    * container_init_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
+    * container_load_test.json - replace **MY_ACCESSER** with the hostname or IP address of your accesser or load balancer
 
-6. build the docker image:
+1. build the docker image:
 
   ```bash
   docker compose build
   ```
 
-7. To run the test for vault mode:
+1. To run the test for vault mode:
 
   ```bash
   docker compose up
   ```
 
-8. To run the test for container mode:
+1. To run the test for container mode:
 
   ```bash
   MODE=container docker compose up
@@ -147,3 +148,5 @@ This repo is provided as-is.
 If you have any problems or questions, open a issue above.  I'll try to answer any questions and fix any glaring problems when I have time.
 
 ## Acknowledgements
+
+The developers who built and maintain [IBM OG](https://github.com/IBM/og).
